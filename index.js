@@ -52,14 +52,20 @@ function renderList() {
     listArr.forEach((gift,index) => {
         const listItem = document.createElement('li')
         const deleteButton = document.createElement('button');
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.addEventListener('click', () => editItem(index));
         deleteButton.textContent = 'Delete'; 
         deleteButton.addEventListener('click', () => deleteItem(index));
+        
 
         listItem.textContent = gift
-        shoppingList.appendChild(listItem)
-        shoppingList.appendChild(deleteButton)
+        listItem.appendChild(deleteButton);
+        listItem.appendChild(editButton);
+        shoppingList.appendChild(listItem);
+        
     })
-    itemInput.value = ''; 
+    itemInput.value = ''; // Clear the input field
 }
 
 function deleteItem(index) {
@@ -68,9 +74,15 @@ function deleteItem(index) {
     listArr.splice(index,1)
     renderList()
 }
-
+function editItem(index) {
+    const toEdit = listArr[index];
+    deleteItem(index);
+    itemInput.value = toEdit;
+}
+// Add event listener to button
 addItemButton.addEventListener('click', checkDuplicate)
 
+// Allow adding items by pressing Enter key
 itemInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
         checkDuplicate()
