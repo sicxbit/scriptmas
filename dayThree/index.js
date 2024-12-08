@@ -30,7 +30,9 @@ function emojifyWord(word){
     if (word.startsWith(':') && word.endsWith(":")){
         const shortCode = word.slice(1,-1);
         return hackedEmojis[shortCode] || word
-    };
+    } else {
+        return word
+    }
 }
 
 console.log(emojifyWord(":angry:"));
@@ -44,7 +46,9 @@ Example output: "Just read your article 👏"
 */ 
 
 function emojifyPhrase(phrase){
-    return;
+    const words = phrase.split(' ');
+    const emojifiedWords = words.map(emojifyWord);
+    return emojifiedWords.join(' ');
 }
 
 console.log(emojifyPhrase("Those shoes :puke:"));
