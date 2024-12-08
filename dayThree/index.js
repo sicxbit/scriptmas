@@ -56,3 +56,22 @@ console.log(emojifyPhrase("Those shoes :puke:"));
 
 // Stretch goal: don't just replace the shortcodes, but also 
 // any emojis are added directly to the text.
+
+function emojifyEverything (phrase) {
+    const words = phrase.split(' ');
+    const emojifiedwords = words.map( word => {
+        if (word.startsWith(':') && word.endsWith(':')) {
+            return emojifyWord(word)
+        }else {
+            return emojifyTheWord(word)
+        }
+    })
+    return emojifiedwords.join(' ');
+}
+
+function emojifyTheWord(word) {
+    return hackedEmojis[word.toLowerCase()] || word
+}
+
+// to check 
+console.log(emojifyEverything("i should cry and puke angry"));
