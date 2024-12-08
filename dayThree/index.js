@@ -27,7 +27,10 @@ Example output: ‍😄
 
 */ 
 function emojifyWord(word){
-    return;
+    if (word.startsWith(':') && word.endsWith(":")){
+        const shortCode = word.slice(1,-1);
+        return hackedEmojis[shortCode] || word
+    };
 }
 
 console.log(emojifyWord(":angry:"));
